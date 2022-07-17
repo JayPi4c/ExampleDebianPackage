@@ -1,0 +1,8 @@
+Package: helloworld
+Version: 1.0
+Architecture: amd64
+Maintainer: JayPi4c <jonas.jp4c@gmail.com>
+Depends: libc6
+Installed-Size: 20
+Homepage: https://github.com/jaypi4c
+Description: Example helloworld! This is an example application named helloworld for a Debian packaging tutorial.
