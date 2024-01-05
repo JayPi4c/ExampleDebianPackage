@@ -32,7 +32,7 @@ jobs:
         token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
     - name: setup git config
       run: |
-        cp helloworld-$GITHUB_REF_NAME.deb ppaDemo/
+        cp helloworld-$GITHUB_REF_NAME.deb ppaDemo/ubuntu/
         cd ppaDemo
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
