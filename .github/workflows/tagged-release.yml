@@ -23,3 +23,18 @@ jobs:
 
         sudo chown -R 0:0 helloworld-$GITHUB_REF_NAME/
         dpkg -b helloworld-$GITHUB_REF_NAME
+    - uses: actions/checkout@v4
+      name: Upload to ppa
+      with:
+        repository: JayPi4c/ppaDemo
+        ref: 'main'
+        token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+    - name: setup git config
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        cp helloworld-$GITHUB_REF_NAME.deb ppaDemo/
+        cd ppaDemo
+        git add .
+        git commit -m "Add new version"
+    - run: git push origin main
