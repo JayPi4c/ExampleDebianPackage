@@ -17,8 +17,9 @@ jobs:
         gcc -O3 helloworld.c -o helloworld
         cd ..
         mkdir -p helloworld-$GITHUB_REF_NAME/usr/local/bin
-        mkdir -p helloworld-$GITHUB_REF_NAME/usr/local/bin
+        mkdir -p helloworld-$GITHUB_REF_NAME/DEBIAN
         cp DEBIAN/control helloworld-$GITHUB_REF_NAME/DEBIAN
+        cp src/helloworld helloworld-$GITHUB_REF_NAME/usr/local/bin
 
         sudo chown -R 0:0 helloworld-$GITHUB_REF_NAME/
         dpkg -b helloworld-$GITHUB_REF_NAME
