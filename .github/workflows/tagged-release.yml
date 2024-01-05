@@ -1,0 +1,25 @@
+name: Tagged Release
+
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  publish:
+    name: Publish release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Compile
+      run: |
+        cd src
+        gcc -O3 helloworld.c -o helloworld
+        cd ..
+        mkdir -p helloworld-${{ steps.tagname.outputs.tag }}/usr/local/bin
+        mkdir -p helloworld-${{ steps.tagname.outputs.tag }}/DEBIAN
+        cp src/helloworld helloworld-${{ steps.tagname.outputs.tag }}/usr/local/bin
+        cp DEBIAN/control helloworld-${{ steps.tagname.outputs.tag }}/DEBIAN
+
+        chown -R 0:0 helloworld-${{ steps.tagname.outputs.tag }}/
+        dpkg -b helloworld-${{ steps.tagname.outputs.tag }}
+    
