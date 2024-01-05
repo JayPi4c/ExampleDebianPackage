@@ -12,16 +12,15 @@ jobs:
     - uses: actions/checkout@v4
     - name: Compile
       run: |
-        echo "tagname: ${{ steps.tagname.outputs.tag }}"
+        echo "tagname: $GITHUB_REF_NAME"
         cd src
         gcc -O3 helloworld.c -o helloworld
         cd ..
-        mkdir -p helloworld-${{ steps.tagname.outputs.tag }}/usr/local/bin
-        mkdir -p helloworld-${{ steps.tagname.outputs.tag }}/DEBIAN
-        cp src/helloworld helloworld-${{ steps.tagname.outputs.tag }}/usr/local/bin
-        cp DEBIAN/control helloworld-${{ steps.tagname.outputs.tag }}/DEBIAN
+        mkdir -p helloworld-$GITHUB_REF_NAME/usr/local/bin
+        mkdir -p helloworld-$GITHUB_REF_NAME/usr/local/bin
+        cp DEBIAN/control helloworld-$GITHUB_REF_NAME/DEBIAN
 
-        chown -R 0:0 helloworld-${{ steps.tagname.outputs.tag }}/
-        dpkg -b helloworld-${{ steps.tagname.outputs.tag }}
+        chown -R 0:0 helloworld-$GITHUB_REF_NAME/
+        dpkg -b helloworld-$GITHUB_REF_NAME
         ls
     
