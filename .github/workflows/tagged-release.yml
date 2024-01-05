@@ -23,5 +23,3 @@ jobs:
 
         sudo chown -R 0:0 helloworld-$GITHUB_REF_NAME/
         dpkg -b helloworld-$GITHUB_REF_NAME
-        ls
-    
