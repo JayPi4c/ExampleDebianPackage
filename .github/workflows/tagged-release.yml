@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    # compile the code and build the deb package
+    # this step is project specific
+    # in the end just a .deb package is required
     - name: Compile
       run: |
         echo "tagname: $GITHUB_REF_NAME"
@@ -23,19 +26,21 @@ jobs:
 
         sudo chown -R 0:0 helloworld-$GITHUB_REF_NAME/
         dpkg -b helloworld-$GITHUB_REF_NAME
+
+    #  now comes the interessting part
+    #  we need to clone the ppa repository
     - uses: actions/checkout@v4
       name: Upload to ppa
       with:
-        repository: JayPi4c/ppaDemo
-        path: ppaDemo
-        # ref: 'main'
+        repository: JayPi4c/ppa
+        path: ppa
         token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
     - name: setup git config
       run: |
         cp helloworld-$GITHUB_REF_NAME.deb ppaDemo/ubuntu/
         cd ppaDemo
-        git config user.name "GitHub Actions Bot"
+        git config user.name "Package deployer (Bot)"
         git config user.email "<>"
         git add .
-        git commit -m "Add new version"
+        git commit -m "ExampleDebianPackage $GITHUB_REF_NAME"
         git push

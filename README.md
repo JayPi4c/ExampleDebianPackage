@@ -24,3 +24,10 @@ The resulting ExampleDebianPackage.deb file can be installed with the following 
 ```bash
 sudo dpkg -i ExampleDebianPackage.deb
 ```
+
+
+## Deployment to GitHub Packages
+
+The Action will automatically build and deploy the package to GitHub Packages when a new release is created. All you need to do is, to create a Persnal Access Token (PAT) with the permissions to push commits to the ppa repository. The PAT needs to be stored as a secret in the repository with the name `PAT`.
+Then, all you need to do is to create a new release and the Action will do the rest.
+
