@@ -34,7 +34,7 @@ jobs:
       with:
         repository: JayPi4c/ppa
         path: ppa
-        token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+        token: ${{ secrets.PAT }}
     - name: setup git config
       run: |
         cp helloworld-$GITHUB_REF_NAME.deb ppaDemo/ubuntu/
