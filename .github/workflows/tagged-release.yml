@@ -37,8 +37,8 @@ jobs:
         token: ${{ secrets.PAT }}
     - name: setup git config
       run: |
-        cp helloworld-$GITHUB_REF_NAME.deb ppaDemo/ubuntu/
-        cd ppaDemo
+        cp helloworld-$GITHUB_REF_NAME.deb ppa/ubuntu/
+        cd ppa
         git config user.name "Package deployer (Bot)"
         git config user.email "<>"
         git add .
